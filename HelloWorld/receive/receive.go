@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	conn, err := amqp.Dial("amqp://5VWDVq1abMqICFmRpt:5VWDVq1abMqICFmRpt@stgmq.betradar.com:5671/unifiedfeed/34959")
-	//conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	//conn, err := amqp.Dial("amqp://5VWDVq1abMqICFmRpt:5VWDVq1abMqICFmRpt@stgmq.betradar.com:5671/unifiedfeed/34959")
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 
 	FailOnError(err, "Failed to connect toç RabbitMQ")
 	defer conn.Close()
@@ -16,6 +16,7 @@ func main() {
 	FailOnError(err, "Failed to open a channel")
 	defer ch.Close()
 
+	// Queue 不用每次都建立，只要其中一方或已存在就好了
 	q, err := ch.QueueDeclare(
 		"hello", // name
 		false,   // durable

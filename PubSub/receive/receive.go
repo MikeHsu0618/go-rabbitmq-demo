@@ -19,8 +19,9 @@ func main() {
 
 	ch, err := conn.Channel()
 	failOnError(err, "Failed to open a channel")
-	defer ch.Close()
-
+	//defer ch.Close()
+	conn.Channel()
+	conn.Channel()
 	err = ch.ExchangeDeclare(
 		"logs",   // name
 		"fanout", // type
